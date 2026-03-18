@@ -6,6 +6,12 @@
 # Read hook JSON from stdin
 HOOK_JSON=$(cat)
 
+# Check mute state
+PLUGIN_ROOT_EARLY="${CLAUDE_PLUGIN_ROOT:-$(dirname "$(dirname "$(readlink -f "$BASH_SOURCE")")")}"
+if [ -f "$PLUGIN_ROOT_EARLY/.mute" ]; then
+    exit 0
+fi
+
 # Skip notification when exiting plan mode (not a real job completion)
 if [ "$1" = "stop" ]; then
     TRANSCRIPT=$(python3 -c "

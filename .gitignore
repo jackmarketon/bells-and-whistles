@@ -1,1 +1,3 @@
 __pycache__/
+.mute
+sounds/speech/elevenlabs/
